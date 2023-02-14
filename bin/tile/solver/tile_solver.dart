@@ -1,18 +1,19 @@
+import '../cell.dart';
 import '../tile.dart';
 import '../tile_controller.dart';
 import 'node.dart';
 
 abstract class TileSolver {
-  List<Tile> getSolution(Tile startTile);
+  List<Tile> getSolution(Tile startTile, Tile resultTile);
 }
 
 class TileSolverImpl implements TileSolver {
   @override
-  List<Tile> getSolution(Tile startTile) {
+  List<Tile> getSolution(Tile startTile, Tile resultTile) {
     List<Tile> solutionList = List.empty(growable: true);
 
-    Node startNode =
-        Node(tile: startTile, g: 0, h: _getOffsideCellsCount(startTile));
+    Node startNode = Node(
+        tile: startTile, g: 0, h: _getManhattanDistance(startTile, resultTile));
 
     List<Node> openList = List.empty(growable: true);
     List<Node> closedList = List.empty(growable: true);
@@ -38,7 +39,7 @@ class TileSolverImpl implements TileSolver {
         return List.from(solutionList.reversed);
       }
 
-      List<Node> children = _generateChildren(currentNode);
+      List<Node> children = _generateChildren(currentNode, resultTile);
 
       children:
       for (Node child in children) {
@@ -77,6 +78,25 @@ class TileSolverImpl implements TileSolver {
     return number;
   }
 
+  int _getManhattanDistance(Tile startTile, Tile resultTile) {
+    int distance = 0;
+
+    for (int i = 0; i < startTile.getRowLength(); i++) {
+      for (int j = 0; j < startTile.getColumnLength(0); j++) {
+        Cell? cell = startTile
+            .getCellFromElement(resultTile.getElementFromCell(Cell(i, j)));
+
+        if (cell == null) {
+          continue;
+        }
+
+        distance += (cell.x - i).abs() + (cell.y - j).abs();
+      }
+    }
+
+    return distance;
+  }
+
   Node _getOptimalNode(List<Node> openList) {
     Node optimalNode = openList.first;
     for (Node node in openList) {
@@ -87,7 +107,7 @@ class TileSolverImpl implements TileSolver {
     return optimalNode;
   }
 
-  List<Node> _generateChildren(Node currentNode) {
+  List<Node> _generateChildren(Node currentNode, Tile resultTile) {
     List<Node> children = List.empty(growable: true);
 
     TileController tileController = TileControllerImpl();
@@ -102,28 +122,28 @@ class TileSolverImpl implements TileSolver {
       children.add(Node(
           tile: leftTile,
           g: currentNode.g + 1,
-          h: _getOffsideCellsCount(currentNode.tile),
+          h: _getManhattanDistance(currentNode.tile, resultTile),
           parent: currentNode));
     }
     if (tileController.move(MoveDirection.right, rightTile)) {
       children.add(Node(
           tile: rightTile,
           g: currentNode.g + 1,
-          h: _getOffsideCellsCount(currentNode.tile),
+          h: _getManhattanDistance(currentNode.tile, resultTile),
           parent: currentNode));
     }
     if (tileController.move(MoveDirection.up, upTile)) {
       children.add(Node(
           tile: upTile,
           g: currentNode.g + 1,
-          h: _getOffsideCellsCount(currentNode.tile),
+          h: _getManhattanDistance(currentNode.tile, resultTile),
           parent: currentNode));
     }
     if (tileController.move(MoveDirection.down, downTile)) {
       children.add(Node(
           tile: downTile,
           g: currentNode.g + 1,
-          h: _getOffsideCellsCount(currentNode.tile),
+          h: _getManhattanDistance(currentNode.tile, resultTile),
           parent: currentNode));
     }
 
