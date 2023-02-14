@@ -1,4 +1,4 @@
-import 'tile.dart';
+import '../tile.dart';
 
 class Node {
   final Node? parent;

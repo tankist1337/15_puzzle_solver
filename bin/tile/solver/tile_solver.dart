@@ -1,6 +1,6 @@
+import '../tile.dart';
+import '../tile_controller.dart';
 import 'node.dart';
-import 'tile.dart';
-import 'tile_controller.dart';
 
 abstract class TileSolver {
   List<Tile> getSolution(Tile startTile);
