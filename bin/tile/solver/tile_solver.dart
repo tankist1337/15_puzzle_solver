@@ -28,7 +28,7 @@ class TileSolverImpl implements TileSolver {
       openList.remove(currentNode);
       closedList.add(currentNode);
 
-      if (_getOffsideCellsCount(currentNode.tile) == 0) {
+      if (_getOffsideCellsCount(currentNode.tile, resultTile) == 0) {
         Node? pathNode = currentNode;
 
         while (pathNode != null) {
