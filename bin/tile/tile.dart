@@ -67,9 +67,9 @@ class Tile {
   }
 
   bool _isCellOutside(Cell cell) {
-    return cell.x < 0 &&
-        cell.x >= getRowLength() &&
-        cell.y < 0 &&
+    return cell.x < 0 ||
+        cell.x >= getRowLength() ||
+        cell.y < 0 ||
         cell.y >= getColumnLength(0);
   }
 
