@@ -62,16 +62,8 @@ class TileSolverImpl implements TileSolver {
     return solutionList;
   }
 
-  int _getOffsideCellsCount(Tile tile) {
+  int _getOffsideCellsCount(Tile tile, Tile resultTile) {
     int number = 0;
-
-    // todo: rempove resultMatrix from this method
-    List<List<int>> resultMatrix = [
-      [1, 2, 3],
-      [4, 5, 6],
-      [7, 8, 0]
-    ];
-    Tile resultTile = Tile(resultMatrix);
 
     number = tile.getDifferencesNumber(resultTile);
 
