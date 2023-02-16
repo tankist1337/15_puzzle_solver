@@ -20,9 +20,12 @@ class TileSolverImpl implements TileSolver {
 
     openList.add(startNode);
 
+    int steps = 0; // for testing
     while (openList.isNotEmpty) {
+      steps++;
       Node currentNode = _getOptimalNode(openList);
-      print("g: ${currentNode.g}| h: ${currentNode.h} | f: ${currentNode.f}");
+      print(
+          "g: ${currentNode.g}| h: ${currentNode.h} | f: ${currentNode.f}"); // for testing
 
       openList.remove(currentNode);
       closedList.add(currentNode);
@@ -34,6 +37,8 @@ class TileSolverImpl implements TileSolver {
           solutionList.add(pathNode.tile);
           pathNode = pathNode.parent;
         }
+
+        print("Steps: $steps"); // for testing
 
         return List.from(solutionList.reversed);
       }
@@ -73,7 +78,7 @@ class TileSolverImpl implements TileSolver {
     int distance = 0;
 
     for (int i = 0; i < startTile.getRowLength(); i++) {
-      for (int j = 0; j < startTile.getColumnLength(0); j++) {
+      for (int j = 0; j < startTile.getColumnLength(); j++) {
         Cell? cell = startTile
             .getCellFromElement(resultTile.getElementFromCell(Cell(i, j)));
 
@@ -103,10 +108,10 @@ class TileSolverImpl implements TileSolver {
 
     TileController tileController = TileControllerImpl();
 
-    var leftTile = Tile.fromSource(currentNode.tile);
-    var rightTile = Tile.fromSource(currentNode.tile);
-    var upTile = Tile.fromSource(currentNode.tile);
-    var downTile = Tile.fromSource(currentNode.tile);
+    var leftTile = currentNode.tile.clone();
+    var rightTile = currentNode.tile.clone();
+    var upTile = currentNode.tile.clone();
+    var downTile = currentNode.tile.clone();
 
     // todo: make more readable
     if (tileController.move(MoveDirection.left, leftTile)) {

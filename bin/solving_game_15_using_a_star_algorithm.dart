@@ -17,8 +17,8 @@ void main(List<String> arguments) {
     [13, 14, 15, 0]
   ];
 
-  Tile startTile = Tile(startMatrix);
-  Tile resultTile = Tile(resultMatrix);
+  Tile startTile = MultiArrayTile(startMatrix);
+  Tile resultTile = MultiArrayTile(resultMatrix);
 
   TileSolver tileSolver = TileSolverImpl();
 
