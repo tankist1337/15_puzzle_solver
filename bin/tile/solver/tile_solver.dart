@@ -20,10 +20,9 @@ class TileSolverImpl implements TileSolver {
 
     openList.add(startNode);
 
-    int steps = 0;
     while (openList.isNotEmpty) {
-      print(steps++);
       Node currentNode = _getOptimalNode(openList);
+      print("g: ${currentNode.g}| h: ${currentNode.h} | f: ${currentNode.f}");
 
       openList.remove(currentNode);
       closedList.add(currentNode);
