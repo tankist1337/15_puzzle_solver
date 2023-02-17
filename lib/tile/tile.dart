@@ -9,7 +9,7 @@ abstract class Tile<T> {
 
   int getColumnLength();
 
-  int getElementFromCell(Cell cell);
+  int? getElementFromCell(Cell cell);
 
   void setStrategyDisplay(TileDisplay strategy);
 
@@ -21,7 +21,7 @@ abstract class Tile<T> {
 
   bool swap(Cell cellA, Cell cellB);
 
-  Cell? getCellFromElement(int element);
+  Cell? getCellFromElement(int? element);
 
   T clone();
 
@@ -47,8 +47,12 @@ class MultiArrayTile implements Tile<MultiArrayTile> {
   }
 
   @override
-  int getElementFromCell(Cell cell) {
-    return _matrix[cell.x][cell.y];
+  int? getElementFromCell(Cell cell) {
+    if (isCellOutside(cell)) {
+      return null;
+    } else {
+      return _matrix[cell.x][cell.y];
+    }
   }
 
   @override
@@ -103,7 +107,11 @@ class MultiArrayTile implements Tile<MultiArrayTile> {
   }
 
   @override
-  Cell? getCellFromElement(int element) {
+  Cell? getCellFromElement(int? element) {
+    if (element == null) {
+      return null;
+    }
+
     for (int i = 0; i < getRowLength(); i++) {
       for (int j = 0; j < getColumnLength(); j++) {
         Cell cell = Cell(i, j);
@@ -165,7 +173,11 @@ class ListTile implements Tile<ListTile> {
   }
 
   @override
-  Cell? getCellFromElement(int element) {
+  Cell? getCellFromElement(int? element) {
+    if (element == null) {
+      return null;
+    }
+
     int index = _boardState.indexOf(element);
     if (index == -1) {
       return null;
@@ -185,8 +197,12 @@ class ListTile implements Tile<ListTile> {
   }
 
   @override
-  int getElementFromCell(Cell cell) {
-    return _boardState[cell.x + cell.y * _size];
+  int? getElementFromCell(Cell cell) {
+    if (isCellOutside(cell)) {
+      return null;
+    } else {
+      return _boardState[cell.x + cell.y * _size];
+    }
   }
 
   @override
@@ -236,7 +252,6 @@ class ListTile implements Tile<ListTile> {
 
   @override
   bool isCellOutside(Cell cell) {
-    int index = (cell.x + cell.y * _size);
-    return index < 0 || index > _size ^ 2;
+    return cell.x < 0 || cell.y < 0 || cell.x > _size || cell.y > _size;
   }
 }
