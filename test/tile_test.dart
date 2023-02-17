@@ -60,4 +60,51 @@ void main() {
 
     expect(tile.isCellOutside(Cell(4, 4)), true);
   });
+
+  test("ListTile getOneLine()", () {
+    final list = [1, 2, 3, 4, 5, 6, 7, 8, 0];
+
+    final Tile tile = ListTile(list);
+
+    expect(tile.getOneLine(), "1 2 3 4 5 6 7 8 0 ");
+  });
+
+  test("ListTile correct swap(cellA, cellB) version", () {
+    final list = [1, 2, 3, 4, 5, 6, 7, 8, 0];
+
+    final Tile tile = ListTile(list);
+
+    final Cell cellA = Cell(1, 1);
+    final Cell cellB = Cell(1, 2);
+
+    tile.swap(cellA, cellB);
+
+    expect(tile.getOneLine(), "1 2 3 4 8 6 7 5 0 ");
+  });
+
+  test("ListTile swap(cellA, cellB) with cells less then 0", () {
+    final list = [1, 2, 3, 4, 5, 6, 7, 8, 0];
+
+    final Tile tile = ListTile(list);
+
+    final Cell cellA = Cell(-1, 1);
+    final Cell cellB = Cell(1, 2);
+
+    tile.swap(cellA, cellB);
+
+    expect(tile.getOneLine(), "1 2 3 4 5 6 7 8 0 ");
+  });
+
+  test("ListTile swap(cellA, cellB) with cells more then tile size", () {
+    final list = [1, 2, 3, 4, 5, 6, 7, 8, 0];
+
+    final Tile tile = ListTile(list);
+
+    final Cell cellA = Cell(1, 1);
+    final Cell cellB = Cell(1, tile.getColumnLength());
+
+    tile.swap(cellA, cellB);
+
+    expect(tile.getOneLine(), "1 2 3 4 5 6 7 8 0 ");
+  });
 }
