@@ -252,6 +252,6 @@ class ListTile implements Tile<ListTile> {
 
   @override
   bool isCellOutside(Cell cell) {
-    return cell.x < 0 || cell.y < 0 || cell.x > _size || cell.y > _size;
+    return cell.x < 0 || cell.y < 0 || cell.x >= _size || cell.y >= _size;
   }
 }

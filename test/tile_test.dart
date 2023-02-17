@@ -28,7 +28,7 @@ void main() {
 
     final Tile tile = ListTile(list);
 
-    expect(tile.getElementFromCell(Cell(-1, 0)), null);
+    expect(tile.getElementFromCell(Cell(3, 3)), null);
   }));
 
   test("ListTile getElementFromCell from the 3x3 tile", (() {
@@ -58,6 +58,6 @@ void main() {
 
     final Tile tile = ListTile(list);
 
-    expect(tile.isCellOutside(Cell(-1, 1)), true);
+    expect(tile.isCellOutside(Cell(4, 4)), true);
   });
 }
