@@ -28,6 +28,6 @@ void main() {
 
     final Tile tile = ListTile(list);
 
-    expect(tile.getElementFromCell(Cell(2, 2)), 5);
+    expect(tile.getElementFromCell(Cell(-1, 0)), null);
   }));
 }

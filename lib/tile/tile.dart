@@ -186,7 +186,7 @@ class ListTile implements Tile<ListTile> {
 
   @override
   int getElementFromCell(Cell cell) {
-    return _boardState[cell.x + cell.y * _size - 1];
+    return _boardState[cell.x + cell.y * _size];
   }
 
   @override
@@ -194,10 +194,10 @@ class ListTile implements Tile<ListTile> {
     if (isCellOutside(cellA) || isCellOutside(cellB)) {
       return false;
     } else {
-      int temporary = _boardState[cellA.x + cellA.y * _size - 1];
-      _boardState[cellA.x + cellA.y * _size - 1] =
-          _boardState[cellB.x + cellB.y * _size - 1];
-      _boardState[cellB.x + cellB.y * _size - 1] = temporary;
+      int temporary = _boardState[cellA.x + cellA.y * _size];
+      _boardState[cellA.x + cellA.y * _size] =
+          _boardState[cellB.x + cellB.y * _size];
+      _boardState[cellB.x + cellB.y * _size] = temporary;
       return true;
     }
   }
@@ -225,8 +225,8 @@ class ListTile implements Tile<ListTile> {
 
     for (int i = 0; i < _size ^ 2; i++) {
       if (_boardState[i] !=
-          tile.getElementFromCell(Cell(
-              (i % _size == 0 ? i : i % _size) - 1, (i / _size).floor()))) {
+          tile.getElementFromCell(
+              Cell((i % _size == 0 ? i : i % _size), (i / _size).floor()))) {
         number++;
       }
     }
