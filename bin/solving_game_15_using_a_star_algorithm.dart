@@ -1,6 +1,6 @@
-import 'tile/solver/solution_path_display.dart';
-import 'tile/solver/tile_solver.dart';
-import 'tile/tile.dart';
+import 'package:solving_game_15_using_a_star_algorithm/tile/solver/solution_path_display.dart';
+import 'package:solving_game_15_using_a_star_algorithm/tile/solver/tile_solver.dart';
+import 'package:solving_game_15_using_a_star_algorithm/tile/tile.dart';
 
 void main(List<String> arguments) {
   List<List<int>> startMatrix = [
