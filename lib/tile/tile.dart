@@ -182,7 +182,7 @@ class ListTile implements Tile<ListTile> {
       return null;
     }
 
-    return Cell((index % _size) - 1, ((index / _size).floor()));
+    return Cell((index % _size), ((index / _size).floor()));
   }
 
   @override
