@@ -136,4 +136,20 @@ void main() {
 
     expect(tileA.getDifferencesNumber(tileB), 5);
   });
+
+  test("ListTile getCellFromElement(int? element) correct", () {
+    final listA = [1, 2, 3, 4, 5, 6, 7, 8, 0];
+
+    final Tile tileA = ListTile(listA);
+
+    expect(tileA.getCellFromElement(6)?.getString(), Cell(2, 1).getString());
+  });
+
+  test("ListTile getCellFromElement(int? element) null", () {
+    final listA = [1, 2, 3, 4, 5, 6, 7, 8, 0];
+
+    final Tile tileA = ListTile(listA);
+
+    expect(tileA.getCellFromElement(10)?.getString(), null);
+  });
 }
