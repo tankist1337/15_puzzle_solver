@@ -107,4 +107,33 @@ void main() {
 
     expect(tile.getOneLine(), "1 2 3 4 5 6 7 8 0 ");
   });
+  test("ListTile compare(tile) == true", () {
+    final listA = [1, 2, 3, 4, 5, 6, 7, 8, 0];
+    final listB = [1, 2, 3, 4, 5, 6, 7, 8, 0];
+
+    final Tile tileA = ListTile(listA);
+    final Tile tileB = ListTile(listB);
+
+    expect(tileA.compare(tileB), true);
+  });
+
+  test("ListTile compare(tile) == false", () {
+    final listA = [1, 2, 3, 4, 5, 6, 7, 8, 0];
+    final listB = [5, 1, 8, 4, 2, 6, 7, 3, 0];
+
+    final Tile tileA = ListTile(listA);
+    final Tile tileB = ListTile(listB);
+
+    expect(tileA.compare(tileB), false);
+  });
+
+  test("ListTile getDifferencesNumber(tile)", () {
+    final listA = [1, 2, 3, 4, 5, 6, 7, 8, 0];
+    final listB = [5, 1, 8, 4, 2, 6, 7, 3, 0];
+
+    final Tile tileA = ListTile(listA);
+    final Tile tileB = ListTile(listB);
+
+    expect(tileA.getDifferencesNumber(tileB), 5);
+  });
 }
