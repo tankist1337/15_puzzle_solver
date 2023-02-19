@@ -1,4 +1,3 @@
-import 'dart:ffi';
 import 'dart:math';
 
 import 'cell.dart';
@@ -232,17 +231,10 @@ class ListTile implements Tile<ListTile> {
   @override
   int getDifferencesNumber(ListTile tile) {
     int number = 0;
-    String oneLineA = getOneLine();
-    String oneLineB = tile.getOneLine();
 
-    for (int i = 0; i < oneLineB.length; i++) {
-      if (oneLineA[i] != oneLineB[i]) number++;
-    }
-
-    for (int i = 0; i < _size ^ 2; i++) {
+    for (int i = 0; i < pow(_size, 2); i++) {
       if (_boardState[i] !=
-          tile.getElementFromCell(
-              Cell((i % _size == 0 ? i : i % _size), (i / _size).floor()))) {
+          tile.getElementFromCell(Cell((i % _size), ((i / _size).floor())))) {
         number++;
       }
     }
