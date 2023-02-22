@@ -1,3 +1,5 @@
+import 'package:collection/collection.dart';
+
 import '../cell.dart';
 import '../tile.dart';
 import '../tile_controller.dart';
@@ -15,19 +17,18 @@ class TileSolverImpl implements TileSolver {
     Node startNode = Node(
         tile: startTile, g: 0, h: _getManhattanDistance(startTile, resultTile));
 
-    List<Node> openList = List.empty(growable: true);
+    HeapPriorityQueue<Node> openHeap = HeapPriorityQueue();
     List<Node> closedList = List.empty(growable: true);
 
-    openList.add(startNode);
+    openHeap.add(startNode);
 
     int steps = 0; // for testing
-    while (openList.isNotEmpty) {
+    while (openHeap.isNotEmpty) {
       steps++;
-      Node currentNode = _getOptimalNode(openList);
+      Node currentNode = openHeap.removeFirst();
       print(
           "g: ${currentNode.g}| h: ${currentNode.h} | f: ${currentNode.f}"); // for testing
 
-      openList.remove(currentNode);
       closedList.add(currentNode);
 
       if (currentNode.tile.getOneLine() == resultTile.getOneLine()) {
@@ -53,13 +54,13 @@ class TileSolverImpl implements TileSolver {
           }
         }
 
-        for (Node openNode in openList) {
-          if (openNode.g < child.g && openNode.tile.compare(child.tile)) {
-            continue children;
-          }
-        }
+        // for (Node openNode in openList) {
+        //   if (openNode.g < child.g && openNode.tile.compare(child.tile)) {
+        //     continue children;
+        //   }
+        // }
 
-        openList.add(child);
+        openHeap.add(child);
       }
     }
 
