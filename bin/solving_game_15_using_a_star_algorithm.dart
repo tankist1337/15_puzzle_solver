@@ -18,8 +18,8 @@ void main(List<String> arguments) {
   // Tile startTile = MultiArrayTile(startMatrix);
   // Tile resultTile = MultiArrayTile(resultMatrix);
 
-  List<int> startList = [4, 6, 2, 7, 3, 5, 8, 1, 0];
-  List<int> resultList = [1, 2, 3, 4, 5, 6, 7, 8, 0];
+  List<int> startList = [4, 12, 15, 5, 3, 1, 9, 7, 14, 13, 8, 10, 11, 6, 2, 0];
+  List<int> resultList = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 0];
 
   Tile startTile = ListTile(startList);
   Tile resultTile = ListTile(resultList);

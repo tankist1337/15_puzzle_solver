@@ -17,8 +17,8 @@ class TileSolverImpl implements TileSolver {
     Node startNode = Node(
         tile: startTile, g: 0, h: _getManhattanDistance(startTile, resultTile));
 
-    HeapPriorityQueue<Node> openHeap = HeapPriorityQueue();
-    List<Node> closedList = List.empty(growable: true);
+    final HeapPriorityQueue<Node> openHeap = HeapPriorityQueue();
+    final Map<String, int> closedMap = <String, int>{};
 
     openHeap.add(startNode);
 
@@ -29,7 +29,7 @@ class TileSolverImpl implements TileSolver {
       print(
           "g: ${currentNode.g}| h: ${currentNode.h} | f: ${currentNode.f}"); // for testing
 
-      closedList.add(currentNode);
+      closedMap[currentNode.tile.getOneLine()] = currentNode.g;
 
       if (currentNode.tile.getOneLine() == resultTile.getOneLine()) {
         Node? pathNode = currentNode;
@@ -48,17 +48,12 @@ class TileSolverImpl implements TileSolver {
 
       children:
       for (Node child in children) {
-        for (Node closedNode in closedList) {
-          if (closedNode.tile.compare(child.tile)) {
+        if (closedMap.containsKey(child.tile.getOneLine())) {
+          if (child.g >= closedMap[child.tile.getOneLine()]!) {
             continue children;
           }
+          closedMap[child.tile.getOneLine()] = child.g;
         }
-
-        // for (Node openNode in openList) {
-        //   if (openNode.g < child.g && openNode.tile.compare(child.tile)) {
-        //     continue children;
-        //   }
-        // }
 
         openHeap.add(child);
       }
