@@ -62,14 +62,6 @@ class TileSolverImpl implements TileSolver {
     return solutionList;
   }
 
-  int _getOffsideCellsCount(Tile tile, Tile resultTile) {
-    int number = 0;
-
-    number = tile.getDifferencesNumber(resultTile);
-
-    return number;
-  }
-
   int _getManhattanDistance(Tile startTile, Tile resultTile) {
     int distance = 0;
 
@@ -87,16 +79,6 @@ class TileSolverImpl implements TileSolver {
     }
 
     return distance;
-  }
-
-  Node _getOptimalNode(List<Node> openList) {
-    Node optimalNode = openList.first;
-    for (Node node in openList) {
-      if (node.f < optimalNode.f) {
-        optimalNode = node;
-      }
-    }
-    return optimalNode;
   }
 
   List<Node> _generateChildren(Node currentNode, Tile resultTile) {
