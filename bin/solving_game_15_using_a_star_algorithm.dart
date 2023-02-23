@@ -18,7 +18,7 @@ void main(List<String> arguments) {
   // Tile startTile = MultiArrayTile(startMatrix);
   // Tile resultTile = MultiArrayTile(resultMatrix);
 
-  List<int> startList = [4, 12, 15, 5, 3, 1, 9, 7, 14, 13, 8, 10, 11, 6, 2, 0];
+  List<int> startList = [5, 1, 9, 3, 11, 13, 6, 8, 14, 10, 4, 15, 0, 12, 7, 2];
   List<int> resultList = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 0];
 
   Tile startTile = ListTile(startList);
@@ -35,11 +35,9 @@ void main(List<String> arguments) {
 
   SolutionPathDisplay solutionPathDisplay = SolutionPathConsoleDisplay();
 
-  int hour =
-      int.parse((stopwatch.elapsed.inSeconds / 60 / 60).toStringAsFixed(0));
-  int minutes =
-      int.parse((stopwatch.elapsed.inSeconds / 60).toStringAsFixed(0));
-  int seconds = stopwatch.elapsed.inSeconds - hour * 60 * 60 - minutes * 60;
+  int hour = stopwatch.elapsed.inHours;
+  int minutes = stopwatch.elapsed.inMinutes - hour * 60;
+  int seconds = stopwatch.elapsed.inSeconds - minutes * 60;
 
   print(
       "time: ${hour != 0 ? "$hour h, " : ""}${minutes != 0 ? "$minutes m, " : ""}$seconds s");
