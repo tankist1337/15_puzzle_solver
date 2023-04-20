@@ -18,7 +18,9 @@ void main(List<String> arguments) {
   // Tile startTile = MultiArrayTile(startMatrix);
   // Tile resultTile = MultiArrayTile(resultMatrix);
 
-  List<int> startList = [5, 1, 9, 3, 11, 13, 6, 8, 14, 10, 4, 15, 0, 12, 7, 2];
+  List<int> startList = arguments[0].split(" ").map(int.parse).toList();
+
+  // List<int> startList = [14, 2, 8, 7, 9, 12, 13, 4, 1, 3, 5, 10, 6, 0, 15, 11];
   List<int> resultList = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 0];
 
   Tile startTile = ListTile(startList);

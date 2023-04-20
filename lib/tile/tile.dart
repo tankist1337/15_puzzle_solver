@@ -144,12 +144,11 @@ class MultiArrayTile implements Tile<MultiArrayTile> {
 class ListTile implements Tile<ListTile> {
   final List<int> _boardState;
   late final int _size;
+  String? _oneLine;
 
   TileDisplay _tileDisplay = ConsoleTileDisplay();
 
-  ListTile(this._boardState) {
-    _size = sqrt(_boardState.length).toInt();
-  }
+  ListTile(this._boardState) : _size = sqrt(_boardState.length).toInt();
 
   @override
   void setStrategyDisplay(TileDisplay strategy) {
@@ -217,15 +216,41 @@ class ListTile implements Tile<ListTile> {
     }
   }
 
+  // Very hard method, 50% time of completation
   @override
   String getOneLine() {
-    String oneLine = "";
+    // 1. Option a little worse then 2,4
+    // if (_oneLine == null) {
+    //   StringBuffer buffer = StringBuffer();
 
-    for (int element in _boardState) {
-      oneLine += "$element ";
-    }
+    //   for (int element in _boardState) {
+    //     buffer.write("$element ");
+    //   }
 
-    return oneLine;
+    //   _oneLine = buffer.toString();
+    // }
+
+    // 2. Option like the 4
+    // _oneLine ??= _boardState.join(" ");
+
+    // 3. Option - worst
+    // if (_oneLine == null) {
+    //   String sstr = "";
+    //   int quadSize = _size * _size;
+    //   int i = 0;
+
+    //   while (i < quadSize) {
+    //     sstr += "${_boardState[i]} ";
+
+    //     i++;
+    //   }
+    //   _oneLine = sstr;
+    // }
+
+    // 4. Option like the 2
+    _oneLine ??= _boardState.toString();
+
+    return _oneLine!;
   }
 
   @override

@@ -26,9 +26,9 @@ class TileSolverImpl implements TileSolver {
     while (openHeap.isNotEmpty) {
       steps++;
       Node currentNode = openHeap.removeFirst();
-      print(
+      /* print(
           "g: ${currentNode.g}| h: ${currentNode.h} | f: ${currentNode.f}"); // for testing
-
+ */
       closedMap[currentNode.tile.getOneLine()] = currentNode.g;
 
       if (currentNode.tile.getOneLine() == resultTile.getOneLine()) {
