@@ -10,7 +10,7 @@ class ConsoleTileDisplay implements TileDisplay {
   void display(Tile tile) {
     for (int i = 0; i < tile.getRowLength(); i++) {
       String line = "";
-      for (int j = 0; j < tile.getColumnLength(0); j++) {
+      for (int j = 0; j < tile.getColumnLength(); j++) {
         line += "${tile.getElementFromCell(Cell(i, j))}\t";
       }
       print(line);

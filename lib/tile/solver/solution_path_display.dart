@@ -24,7 +24,7 @@ class SolutionPathConsoleDisplay implements SolutionPathDisplay {
     for (int k = 0; k < solutionPath.length; k++) {
       Tile step = solutionPath[k];
       for (int i = 0; i < step.getRowLength(); i++) {
-        for (int j = 0; j < step.getColumnLength(0); j++) {
+        for (int j = 0; j < step.getColumnLength(); j++) {
           if (k == solutionPath.length - 1) {
             continue;
           } else {
